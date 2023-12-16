@@ -21,7 +21,7 @@ public class ItemDTO implements Serializable {
         this.qtyOnHand = qtyOnHand;
     }
 
-    public String getCode() {
+    public static String getCode() {
         return code;
     }
 
@@ -29,7 +29,7 @@ public class ItemDTO implements Serializable {
         this.code = code;
     }
 
-    public String getDescription() {
+    public static String getDescription() {
         return description;
     }
 
@@ -37,7 +37,7 @@ public class ItemDTO implements Serializable {
         this.description = description;
     }
 
-    public BigDecimal getUnitPrice() {
+    public static BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
@@ -45,7 +45,7 @@ public class ItemDTO implements Serializable {
         this.unitPrice = unitPrice;
     }
 
-    public int getQtyOnHand() {
+    public static int getQtyOnHand() {
         return qtyOnHand;
     }
 
