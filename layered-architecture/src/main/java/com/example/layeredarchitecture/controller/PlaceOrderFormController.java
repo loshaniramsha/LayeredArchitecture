@@ -1,5 +1,6 @@
 package com.example.layeredarchitecture.controller;
 
+import com.example.layeredarchitecture.dao.PleaseOrderDAOimpl;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
@@ -183,26 +184,32 @@ public class PlaceOrderFormController {
     }
 
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
-        pstm.setString(1, code);
-        return pstm.executeQuery().next();
+//        Connection connection = DBConnection.getDbConnection().getConnection();
+//        PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
+//        pstm.setString(1, code);
+//        return pstm.executeQuery().next();
+        PleaseOrderDAOimpl pleaseOrderDAOimpl=new PleaseOrderDAOimpl();
+        return pleaseOrderDAOimpl.existsItem(code);
     }
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
-        pstm.setString(1, id);
-        return pstm.executeQuery().next();
+//        Connection connection = DBConnection.getDbConnection().getConnection();
+//        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
+//        pstm.setString(1, id);
+//        return pstm.executeQuery().next();
+        PleaseOrderDAOimpl pleaseOrderDAOimpl=new PleaseOrderDAOimpl();
+       return pleaseOrderDAOimpl.existsCustomer(id);
     }
 
     public String generateNewOrderId() {
         try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
-
-            return rst.next() ? String.format("OID-%03d", (Integer.parseInt(rst.getString("oid").replace("OID-", "")) + 1)) : "OID-001";
+//            Connection connection = DBConnection.getDbConnection().getConnection();
+//            Statement stm = connection.createStatement();
+//            ResultSet rst = stm.executeQuery("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
+//
+//            return rst.next() ? String.format("OID-%03d", (Integer.parseInt(rst.getString("oid").replace("OID-", "")) + 1)) : "OID-001";
+            PleaseOrderDAOimpl pleaseOrderDAOimpl=new PleaseOrderDAOimpl();
+            pleaseOrderDAOimpl.newOrderId();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new order id").show();
         } catch (ClassNotFoundException e) {
@@ -211,15 +218,16 @@ public class PlaceOrderFormController {
         return "OID-001";
     }
 
-    private void loadAllCustomerIds() {
+    private void loadAllCustomerIds() throws SQLException, ClassNotFoundException {
         try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
-
-            while (rst.next()) {
-                cmbCustomerId.getItems().add(rst.getString("id"));
-            }
+//            Connection connection = DBConnection.getDbConnection().getConnection();
+//            Statement stm = connection.createStatement();
+//            ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
+//
+//            while (rst.next()) {
+//                cmbCustomerId.getItems().add(rst.getString("id"));
+            PleaseOrderDAOimpl pleaseOrderDAOimpl = new PleaseOrderDAOimpl();
+            pleaseOrderDAOimpl.loadAllCustomer(cmbCustomerId);
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to load customer ids").show();
@@ -228,15 +236,17 @@ public class PlaceOrderFormController {
         }
     }
 
-    private void loadAllItemCodes() {
+    private void loadAllItemCodes() throws SQLException, ClassNotFoundException {
         try {
             /*Get all items*/
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM Item");
-            while (rst.next()) {
-                cmbItemCode.getItems().add(rst.getString("code"));
-            }
+//            Connection connection = DBConnection.getDbConnection().getConnection();
+//            Statement stm = connection.createStatement();
+//            ResultSet rst = stm.executeQuery("SELECT * FROM Item");
+//            while (rst.next()) {
+//                cmbItemCode.getItems().add(rst.getString("code"));
+            PleaseOrderDAOimpl pleaseOrderDAOimpl=new PleaseOrderDAOimpl();
+            pleaseOrderDAOimpl.loadAllItemCode(cmbItemCode);
+
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (ClassNotFoundException e) {

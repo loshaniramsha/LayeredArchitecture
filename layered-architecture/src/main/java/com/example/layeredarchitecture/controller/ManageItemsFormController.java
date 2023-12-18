@@ -2,6 +2,7 @@ package com.example.layeredarchitecture.controller;
 
 import com.example.layeredarchitecture.dao.CustomerDAOImpl;
 import com.example.layeredarchitecture.dao.ItemDAOImpl;
+import com.example.layeredarchitecture.dao.ItemDAOinterface;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.ItemDTO;
 import com.example.layeredarchitecture.view.tdm.ItemTM;
@@ -37,6 +38,7 @@ public class ManageItemsFormController {
     public TableView<ItemTM> tblItems;
     public TextField txtUnitPrice;
     public JFXButton btnAddNewItem;
+    ItemDAOinterface itemDAO= (ItemDAOinterface) new ItemDAOImpl();
 
     public void initialize() {
         tblItems.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -142,7 +144,7 @@ public class ManageItemsFormController {
 //            PreparedStatement pstm = connection.prepareStatement("DELETE FROM Item WHERE code=?");
 //            pstm.setString(1, code);
 //            pstm.executeUpdate();
-            ItemDAOImpl itemDAO=new ItemDAOImpl();
+          //  ItemDAOinterface itemDAO= (ItemDAOinterface) new ItemDAOImpl();
             itemDAO.deleteItem(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
@@ -190,7 +192,7 @@ public class ManageItemsFormController {
 //                pstm.setBigDecimal(3, unitPrice);
 //                pstm.setInt(4, qtyOnHand);
 //                pstm.executeUpdate();
-                ItemDAOImpl itemDAO=new ItemDAOImpl();
+               // ItemDAOinterface itemDAO= (ItemDAOinterface) new ItemDAOImpl();
                 itemDAO.saveItem(new ItemDTO(code,description,unitPrice,qtyOnHand));
                 tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
 
@@ -213,7 +215,7 @@ public class ManageItemsFormController {
 //                pstm.setInt(3, qtyOnHand);
 //                pstm.setString(4, code);
 //                pstm.executeUpdate();
-                ItemDAOImpl itemDAO=new ItemDAOImpl();
+               // ItemDAOinterface itemDAO= (ItemDAOinterface) new ItemDAOImpl();
                 itemDAO.updateitem(new ItemDTO(code,description,unitPrice,qtyOnHand));
 
                 ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
@@ -237,7 +239,7 @@ public class ManageItemsFormController {
 //        PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
 //        pstm.setString(1, code);
 //        return pstm.executeQuery().next();
-        ItemDAOImpl itemDAO=new ItemDAOImpl();
+       // ItemDAOinterface itemDAO= (ItemDAOinterface) new ItemDAOImpl();
         return itemDAO. exiistItem(code);
     }
 
