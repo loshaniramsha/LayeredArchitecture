@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.layeredarchitecture.controller.SearchOrderFormController">
+   <children>
+      <Label layoutX="174.0" layoutY="14.0" prefHeight="21.0" prefWidth="193.0" text="Search Form">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="31.0" layoutY="89.0" prefWidth="150.0" promptText="Cust Id" />
+      <ComboBox layoutX="31.0" layoutY="169.0" prefWidth="150.0" promptText="Order Id" />
+      <TextField layoutX="228.0" layoutY="89.0" prefHeight="31.0" prefWidth="346.0" promptText="Customer name" />
+      <TextField layoutX="228.0" layoutY="169.0" prefHeight="31.0" prefWidth="346.0" promptText="Date" />
+   </children>
+</AnchorPane>
