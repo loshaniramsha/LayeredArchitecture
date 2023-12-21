@@ -12,7 +12,7 @@ public class OrderDTO  {
     private String customerName;
     private BigDecimal orderTotal;
 
-    public OrderDTO() {
+    public OrderDTO(String orderId, LocalDate orderDate, String customerId) {
     }
 
     public OrderDTO(String orderId, LocalDate orderDate, String customerId, String customerName, BigDecimal orderTotal) {
@@ -21,6 +21,10 @@ public class OrderDTO  {
         this.customerId = customerId;
         this.customerName = customerName;
         this.orderTotal = orderTotal;
+    }
+
+    public OrderDTO(String orderId, String date, String customerID) {
+
     }
 
     public String getOrderId() {
